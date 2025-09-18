@@ -66,13 +66,14 @@ namespace Akasztofa
             eddig_talalt_betuk += also;
             string uj = "";
             string nem_jok = "";
+           
 
             do
             {
                 
                 Console.WriteLine("Adjon meg egy betűt!: ");
                 string betu = Console.ReadLine();
-
+                bool van_benne = szo.Contains(betu);
                 if (nem_jok.Contains(betu))
                 {
                     Console.Beep();
@@ -83,9 +84,9 @@ namespace Akasztofa
                     Console.ReadLine();
                     continue;
                 }
-                if (szo.Contains(betu)){
+                if (van_benne){
                     Console.Clear();
-
+                    
                     for (int i = 0; i < szohossz; i++)
                     {
                         if (szo[i] == betu[0])
@@ -104,6 +105,7 @@ namespace Akasztofa
                     
                     eddig_talalt_betuk = uj;
                     uj = "";
+                   
                 }
                 else
                 {
@@ -145,9 +147,13 @@ namespace Akasztofa
 
 
                 }
+
+                Console.WriteLine(van_benne? "Talált": "Nem talált");
+                Console.WriteLine();
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
                 Console.WriteLine($"Élet: {akasztofa_elet+ember_elet} ");
                 Console.WriteLine($"Nem jó betűk: {nem_jok}");
+
                 Console.Beep();
 
 
