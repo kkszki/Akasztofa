@@ -28,35 +28,40 @@ namespace Akasztofa
             eddig_talalt_betuk += also;
             string uj = "";
 
-
-
             do
             {
                 
                 Console.WriteLine("Adjon meg egy betűt!: ");
                 string betu = Console.ReadLine();
-              
-                for (int i=0; i < szohossz; i++)
-                {
-                    if (szo[i] == betu[0])
-                    {
-                        uj += betu[0];
-                    }
-                    else
-                    {
-                        uj += eddig_talalt_betuk[i];
-                    }
+                if (szo.Contains(betu)){
+                    Console.Clear();
 
+                    for (int i = 0; i < szohossz; i++)
+                    {
+                        if (szo[i] == betu[0])
+                        {
+                            uj += betu[0];
+                        }
+                        else
+                        {
+                            uj += eddig_talalt_betuk[i];
+                        }
+                    }
+                    
+                    Console.WriteLine(uj);
+                    eddig_talalt_betuk = uj;
+                    uj = "";
                 }
-
-                Console.WriteLine(uj);
-                eddig_talalt_betuk = uj;
-                uj = "";
-               
-
+                else
+                {
+                    elet--;
+                    Console.WriteLine(elet);
+                }
                 
-            }while (! kitalalva);
-
+            } while (elet!=0);
+            Console.WriteLine("meghaltál");
+            Console.WriteLine("Enterre tovább..");
+            Console.ReadLine(); 
         }
     }
 }
