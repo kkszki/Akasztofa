@@ -14,24 +14,35 @@ namespace Akasztofa
         static void Main(string[] args)
         {
 
+            
+
             string[] akasztofa = new string[]
           {
             "        ------------------                 ",
-            "         || //                             ",
-            "         ||//                              ",
-            "         ||/                               ",
-            "         ||                                ",
-            "         ||                                ",
-            "         ||                                ",
-            "         ||                                ",
-            "         ||                                ",
-            "         ||                                ",
+            "         || //       ",
+            "         ||//        ",
+            "         ||/         ",
+            "         ||          ",
+            "         ||          ",
+            "         ||          ",
+            "         ||          ",
+            "         ||          ",
+            "         ||          ",
             "-------------------------------------------",
           };
-            //foreach (var sor in rajz)
-            //{
-            //    Console.WriteLine(sor);
-            //}
+
+            string[] ember = new string[]
+            {
+                "         ",
+                "    |    ",
+                "    O    ",
+                "   /|\\   ",
+                "    |    ",
+                "   /|\\ "
+              
+               
+
+            };
 
 
 
@@ -45,7 +56,8 @@ namespace Akasztofa
             bool kitalalva = false;
             string szo = szavak[rnd.Next(szavak.Length)];
             Console.WriteLine(szo);
-            int elet = 11;
+            int akasztofa_elet = 11;
+            int ember_elet = 5;
            
             int szohossz = szo.Length;
             string also = new string('_', szohossz);
@@ -84,23 +96,49 @@ namespace Akasztofa
                 }
                 else
                 {
-                    elet--;
+                    
+                    if (akasztofa_elet > 0)
+                    {
+                        akasztofa_elet--;
+                    }
+                    else
+                    {
+                        ember_elet--;
+                    }
                     Console.Clear();
                     betu += ", ";
                     nem_jok += betu;
+
+                  
+                        for (int i = 1; i < (5 - ember_elet + 1); i++)
+                        {
+                            akasztofa[i] += ember[i];
+                        }
+                    }
+                    Console.WriteLine("\n\n\n");
+                    for (int i = akasztofa_elet; i <= 10; i++)
+                    {
+                        Console.WriteLine(akasztofa[i]);
+                    }
+                    if (akasztofa_elet == 0)
+                    {
+                        for (int i = 1; i <= (5 - ember_elet); i++)
+                        {
+                            akasztofa[i] = akasztofa[i].Substring(0, akasztofa[i].Length - 9);
+
+                        }
+                    
 
 
 
                 }
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
-                Console.WriteLine($"Élet: {elet} ");
+                Console.WriteLine($"Élet: {akasztofa_elet+ember_elet} ");
                 Console.WriteLine($"Nem jó betűk: {nem_jok}");
-                for(int i = elet; i <=10; i++)
-                {
-                    Console.WriteLine(akasztofa[i]);
-                }
+               
+                
 
-            } while (elet!=0 && !kitalalva);
+            } while ((akasztofa_elet+ember_elet)!=0 && !kitalalva);
             Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
 
             Console.WriteLine("Enterre tovább..");
