@@ -27,6 +27,7 @@ namespace Akasztofa
             string eddig_talalt_betuk = "";
             eddig_talalt_betuk += also;
             string uj = "";
+            string nem_jok = "";
 
             do
             {
@@ -51,16 +52,21 @@ namespace Akasztofa
                     {
                         kitalalva=true;
                     }
-                    Console.WriteLine(uj);
+                    
                     eddig_talalt_betuk = uj;
                     uj = "";
                 }
                 else
                 {
                     elet--;
-                    Console.WriteLine(elet);
+                    Console.Clear();
+                    betu += ", ";
+                    nem_jok += betu;
                 }
-                
+                Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
+                Console.WriteLine($"Élet: {elet} ");
+                Console.WriteLine($"Nem jó betűk: {nem_jok}");
+
             } while (elet!=0 && !kitalalva);
             Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
 
