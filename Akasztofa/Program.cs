@@ -38,7 +38,7 @@ namespace Akasztofa
                 "    O    ",
                 "   /|\\   ",
                 "    |    ",
-                "   /|\\ "
+                "   /|\\   "
               
                
 
@@ -72,6 +72,17 @@ namespace Akasztofa
                 
                 Console.WriteLine("Adjon meg egy betűt!: ");
                 string betu = Console.ReadLine();
+
+                if (nem_jok.Contains(betu))
+                {
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.WriteLine("ez már volt!");
+                    Console.WriteLine("Enterrel tovább");
+                    Console.ReadLine();
+                    continue;
+                }
                 if (szo.Contains(betu)){
                     Console.Clear();
 
@@ -110,12 +121,14 @@ namespace Akasztofa
                     nem_jok += betu;
 
                   
-                        for (int i = 1; i < (5 - ember_elet + 1); i++)
-                        {
-                            akasztofa[i] += ember[i];
-                        }
+                       
                     }
-                    Console.WriteLine("\n\n\n");
+
+                for (int i = 1; i < (5 - ember_elet + 1); i++)
+                {
+                    akasztofa[i] += ember[i];
+                }
+                Console.WriteLine("\n\n\n");
                     for (int i = akasztofa_elet; i <= 10; i++)
                     {
                         Console.WriteLine(akasztofa[i]);
@@ -135,11 +148,15 @@ namespace Akasztofa
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
                 Console.WriteLine($"Élet: {akasztofa_elet+ember_elet} ");
                 Console.WriteLine($"Nem jó betűk: {nem_jok}");
-               
-                
+                Console.Beep();
+
+
 
             } while ((akasztofa_elet+ember_elet)!=0 && !kitalalva);
             Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
+            Console.Beep();
+            Console.Beep();
+            Console.Beep();
 
             Console.WriteLine("Enterre tovább..");
             Console.ReadLine(); 
