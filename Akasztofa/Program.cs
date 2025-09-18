@@ -27,6 +27,7 @@ namespace Akasztofa
 
                 
             }while (! talalt);
+
         }
     }
 }
