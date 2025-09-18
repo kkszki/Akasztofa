@@ -14,18 +14,19 @@ namespace Akasztofa
         static void Main(string[] args)
         {
 
-            string[] rajz = new string[]
+            string[] akasztofa = new string[]
           {
-    "------------------",
-    "    ||",
-    "    ||",
-    "    ||",
-    "    ||        / \\",
-    "    ||         |",
-    "    ||        \\|/",
-    "    ||/        O",
-    "    || /       |",
-    "---------------------"
+            "        ------------------                 ",
+            "         || //                             ",
+            "         ||//                              ",
+            "         ||/                               ",
+            "         ||                                ",
+            "         ||                                ",
+            "         ||                                ",
+            "         ||                                ",
+            "         ||                                ",
+            "         ||                                ",
+            "-------------------------------------------",
           };
             //foreach (var sor in rajz)
             //{
@@ -44,7 +45,7 @@ namespace Akasztofa
             bool kitalalva = false;
             string szo = szavak[rnd.Next(szavak.Length)];
             Console.WriteLine(szo);
-            int elet = 10;
+            int elet = 11;
            
             int szohossz = szo.Length;
             string also = new string('_', szohossz);
@@ -94,9 +95,9 @@ namespace Akasztofa
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
                 Console.WriteLine($"Élet: {elet} ");
                 Console.WriteLine($"Nem jó betűk: {nem_jok}");
-                for(int i = 9; i >= elet; i--)
+                for(int i = elet; i <=10; i++)
                 {
-                    Console.WriteLine(rajz[i]);
+                    Console.WriteLine(akasztofa[i]);
                 }
 
             } while (elet!=0 && !kitalalva);
