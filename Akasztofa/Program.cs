@@ -47,7 +47,10 @@ namespace Akasztofa
                             uj += eddig_talalt_betuk[i];
                         }
                     }
-                    
+                    if (szo == uj)
+                    {
+                        kitalalva=true;
+                    }
                     Console.WriteLine(uj);
                     eddig_talalt_betuk = uj;
                     uj = "";
@@ -58,8 +61,9 @@ namespace Akasztofa
                     Console.WriteLine(elet);
                 }
                 
-            } while (elet!=0);
-            Console.WriteLine("meghaltál");
+            } while (elet!=0 && !kitalalva);
+            Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
+
             Console.WriteLine("Enterre tovább..");
             Console.ReadLine(); 
         }
