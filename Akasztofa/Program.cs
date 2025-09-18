@@ -13,6 +13,31 @@ namespace Akasztofa
         
         static void Main(string[] args)
         {
+
+            string[] rajz = new string[]
+          {
+    "------------------",
+    "    ||",
+    "    ||",
+    "    ||",
+    "    ||        / \\",
+    "    ||         |",
+    "    ||        \\|/",
+    "    ||/        O",
+    "    || /       |",
+    "---------------------"
+          };
+            //foreach (var sor in rajz)
+            //{
+            //    Console.WriteLine(sor);
+            //}
+
+
+
+
+
+
+
             string[] szavak = { "elso", "alma", "vízibicikli", "kukac" };
             Random rnd = new Random();
             
@@ -62,10 +87,17 @@ namespace Akasztofa
                     Console.Clear();
                     betu += ", ";
                     nem_jok += betu;
+
+
+
                 }
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
                 Console.WriteLine($"Élet: {elet} ");
                 Console.WriteLine($"Nem jó betűk: {nem_jok}");
+                for(int i = 9; i >= elet; i--)
+                {
+                    Console.WriteLine(rajz[i]);
+                }
 
             } while (elet!=0 && !kitalalva);
             Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
