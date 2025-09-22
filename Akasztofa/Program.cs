@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,12 +51,12 @@ namespace Akasztofa
 
 
 
-            string[] szavak = { "elso", "alma", "vízibicikli", "kukac" };
+            string[] szavak = { "Elso", "Alma", "Vízibicikli", "Kukac" };
             Random rnd = new Random();
             
             bool kitalalva = false;
             string szo = szavak[rnd.Next(szavak.Length)];
-            Console.WriteLine(szo);
+            
             int akasztofa_elet = 11;
             int ember_elet = 5;
            
@@ -67,14 +68,54 @@ namespace Akasztofa
             string uj = "";
             string nem_jok = "";
            
+            bool kis_nagy_kulonbseg=false;
+            char letter = ' ';
 
+
+            try
+            {
+                Console.WriteLine("Kérem adja meg, hogy nézzük-e a kis és nagy betűket szigorúan (i/n)");
+                string kn = Console.ReadLine();
+                if (kn == "i")
+                {
+                    kis_nagy_kulonbseg = true;
+                }
+                Console.Clear();
+            }
+            catch (Exception e){
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Hiba történt!");
+                Console.WriteLine("Valószínű nem egy karakter-t kaptam");
+                Console.WriteLine("Kér hibaüzenetet: (i/n)");
+                Console.ForegroundColor = ConsoleColor.White;
+                string i_n = Console.ReadLine();
+                if (i_n == "i")
+                {
+                    Console.WriteLine(e);
+                }
+            }
             do
             {
+                try
+                {   
+                   
+                    Console.WriteLine("Adjon meg egy betűt!: ");
+                    string betu = Console.ReadLine();
+                    letter = Convert.ToChar(betu);
+                    if (!kis_nagy_kulonbseg)
+                    {
+                        szo = szo.ToLower();
+                        letter = char.ToLower(letter);
+                    }
+
+                    
                 
-                Console.WriteLine("Adjon meg egy betűt!: ");
-                string betu = Console.ReadLine();
-                bool van_benne = szo.Contains(betu);
-                if (nem_jok.Contains(betu))
+
+
+
+                bool szoban_van = szo.Contains(letter);
+                    bool rontottban_van = nem_jok.Contains(letter);
+                if (nem_jok.Contains(letter))
                 {
                     Console.Beep();
                     Console.Beep();
@@ -82,29 +123,48 @@ namespace Akasztofa
                     Console.WriteLine("ez már volt!");
                     Console.WriteLine("Enterrel tovább");
                     Console.ReadLine();
-                    continue;
+                      
+                    
                 }
-                if (van_benne){
-                    Console.Clear();
+
+                if (eddig_talalt_betuk.Contains(letter))
+                {
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.WriteLine("Ez már egyszer el lett találva, de szééép volt! :-)");
+                    Console.WriteLine("Enterrel tovább");
+                    Console.ReadLine();
+                   Console.Clear();
+               
+                }
+
+
+
+
+
+
+                if (szoban_van || rontottban_van){
+                Console.Clear();
                     
-                    for (int i = 0; i < szohossz; i++)
+                for (int i = 0; i < szohossz; i++)
+                {
+                    if (szo[i] == letter)
                     {
-                        if (szo[i] == betu[0])
-                        {
-                            uj += betu[0];
-                        }
-                        else
-                        {
-                            uj += eddig_talalt_betuk[i];
-                        }
+                        uj += letter;
                     }
-                    if (szo == uj)
+                    else
                     {
-                        kitalalva=true;
+                        uj += eddig_talalt_betuk[i];
                     }
+                }
+                if (szo == uj)
+                {
+                    kitalalva=true;
+                }
                     
-                    eddig_talalt_betuk = uj;
-                    uj = "";
+                eddig_talalt_betuk = uj;
+                uj = "";
                    
                 }
                 else
@@ -119,8 +179,8 @@ namespace Akasztofa
                         ember_elet--;
                     }
                     Console.Clear();
-                    betu += ", ";
-                    nem_jok += betu;
+                    
+                    nem_jok += letter;
 
                   
                        
@@ -131,7 +191,9 @@ namespace Akasztofa
                     akasztofa[i] += ember[i];
                 }
                 Console.WriteLine("\n\n\n");
-                    for (int i = akasztofa_elet; i <= 10; i++)
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                for (int i = akasztofa_elet; i <= 10; i++)
                     {
                         Console.WriteLine(akasztofa[i]);
                     }
@@ -147,22 +209,77 @@ namespace Akasztofa
 
 
                 }
-
-                Console.WriteLine(van_benne? "Talált": "Nem talált");
+                if (szoban_van)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                    Console.WriteLine(szoban_van ? "Talált" : "Nem talált");
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"Kitalálni: {eddig_talalt_betuk}");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Élet: {akasztofa_elet+ember_elet} ");
-                Console.WriteLine($"Nem jó betűk: {nem_jok}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                    if (nem_jok.Length > 0)
+                    {
+                        Console.Write(nem_jok[0]);
+                        for (int i = 1; i < nem_jok.Length; i++)
+                        {
+                           
+                                Console.Write($", {nem_jok[i]}");
+                            
+                            
+                            
+
+
+                        }
+
+                    }
+                    Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
 
                 Console.Beep();
 
 
 
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Hiba történt!");
+                    Console.WriteLine("Valószínű nem egy karakter-t kaptam");
+                    Console.WriteLine("Kér hibaüzenetet: (i/n)");
+                    Console.ForegroundColor= ConsoleColor.White;
+                    string i_n = Console.ReadLine();
+                    if (i_n == "i")
+                    {
+                        Console.WriteLine(e);
+                    }
+                  
+
+                  
+                }
             } while ((akasztofa_elet+ember_elet)!=0 && !kitalalva);
-            Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
+            if (kitalalva)
+            {
+               
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            else
+            {
+        
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+
+                Console.WriteLine(kitalalva ? "Nyertél" : "Vesztettél");
             Console.Beep();
             Console.Beep();
             Console.Beep();
+            Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine("Enterre tovább..");
             Console.ReadLine(); 
